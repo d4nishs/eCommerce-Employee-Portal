@@ -3,6 +3,8 @@
     // Written by Danish Siddiqui
     // Last Updated: 11/27/2020
     // dash.php
+    error_reporting(E_ALL);
+    ini_set("display_errors","On");
 
     require_once('db-connect.php');
     session_start();
@@ -25,16 +27,18 @@
     }
 
     // initialize navigation panel as global var
-    $panel = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-              <a href="orders.php">Orders</a>
-              <form action="dash.php" method="POST">
-              <button style="margin:25px;" name="logout" type="logout">Sign out</button>
-              </form>';
+    $panel = '<a href="dash.php">Dashboard</a>
+    					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    					<a href="orders.php">Orders</a>
+    					<form action="dash.php" method="POST">
+    					<button style="margin:25px;" name="logout" type="logout">Sign out</button>
+    					</form>';
+
 
 
     // Generate the Page
     // Call required functions
-    function generatePage()
+    function generatePage($conn)
     {
       // primary welcoming message
       echo '<center>';
@@ -42,11 +46,11 @@
       echo '<div class="stats"><div class="today row">';
       date_default_timezone_set('America/New_York');
 
-      $date = date('y-m-d', time());
-      $stop_date = date('y-m-d', strtotime($stop_date . ' +1 day'));
+      $begin = date('y-m-d', time());
+      $stop_date = date('y-m-d', strtotime($begin . ' +1 day'));
 
       echo '<h2>Today in Numbers</h2>';
-      reQuery($conn,$date,$stop_date);
+      reQuery($conn,$begin,$stop_date);
 
       echo '<div class="last7Days row">';
       echo '<h2>Last 7 days in Numbers</h2>';
@@ -69,11 +73,11 @@
       echo '<div class="thisMonth row">';
       echo '<h2>This Month in Numbers</h2>';
 
-      $first_day_this_month = date('y-m-01'); // hard-coded '01' for first day
+      $begin = date('y-m-01'); // hard-coded '01' for first day
       $date = date('y-m-d', time());
       $stop_date = date('y-m-d', strtotime($stop_date . ' +1 day'));
 
-      reQuery($conn,$first_day_this_month,$stop_date);
+      reQuery($conn,$begin,$stop_date);
       echo'</div></div>';
     }
 
@@ -210,7 +214,7 @@ body {
 </div>
 
 <div id ="main">
-<?php generatePage();?>
+<?php generatePage($conn);?>
 </div>
 </body>
 </html>

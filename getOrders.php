@@ -111,8 +111,6 @@ class OrdersDisplay
       <div class="box-large" id="sale_info">
 				<p class="quantity" data-id10="'.$row['id'].'"><center>Quantity Ordered: '.$row['quantity'].'</center></p>
 				<p class="total" data-id11="'.$row['id'].'"><center>Projected Cost: '.number_format(((float)($row['srcPrice']*($row['quantity']/$row['lot']))), 2, '.', '').'</center></p>
-				<p><center>Rank: '.$row['rank'].'</center></p>
-				<p><center>Competitors: '.$row['competitors'].'</center></p>
 			</div>';
 
       $output.='

@@ -24,7 +24,8 @@ if(isset($_POST['logout'])){
 	exit();
 }
 
-$panel = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+$panel = '<a href="dash.php">Dashboard</a>
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 					<a href="orders.php">Orders</a>
 					<form action="dash.php" method="POST">
 					<button style="margin:25px;" name="logout" type="logout">Sign out</button>
@@ -149,7 +150,7 @@ p:empty:not(:focus)::before {
 {
  display: inline-block;
  text-align:center;
- background: url('loader.gif') no-repeat center;
+ background: url('imgs/loader.gif') no-repeat center;
  height: 25px;
  padding: 200px;
 }
